@@ -1,4 +1,6 @@
+use num::clamp;
 use std::fmt::{self, Display};
+
 pub struct Item {
     pub name: String,
     pub sell_in: i32,
@@ -15,13 +17,7 @@ impl Item {
     }
 
     pub fn update_quality_by(&mut self, n: i32) {
-        if self.quality + n < 0 {
-            self.quality = 0;
-        } else if self.quality + n < 50 {
-            self.quality += n;
-        } else {
-            self.quality = 50;
-        }
+        self.quality = clamp(self.quality + n, 0, 50);
     }
 
     pub fn pass_a_day(&mut self) {
