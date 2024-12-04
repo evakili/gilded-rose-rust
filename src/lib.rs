@@ -19,6 +19,10 @@ impl Item {
             self.quality += 1;
         }
     }
+
+    pub fn pass_a_day(&mut self) {
+        self.sell_in -= 1;
+    }
 }
 
 impl Display for Item {
@@ -40,7 +44,7 @@ impl GildedRose {
         for i in 0..self.items.len() {
             if self.items[i].name == "Aged Brie" {
                 self.items[i].update_quality_by_one();
-                self.items[i].sell_in = self.items[i].sell_in - 1;
+                self.items[i].pass_a_day();
                 if self.items[i].sell_in < 0 {
                     self.items[i].update_quality_by_one();
                 }
@@ -53,7 +57,7 @@ impl GildedRose {
                     self.items[i].update_quality_by_one();
                 }
 
-                self.items[i].sell_in = self.items[i].sell_in - 1;
+                self.items[i].pass_a_day();
                 if self.items[i].sell_in < 0 {
                     self.items[i].quality -= self.items[i].quality;
                 }
@@ -63,7 +67,7 @@ impl GildedRose {
                 if self.items[i].quality > 0 {
                     self.items[i].quality -= 1;
                 }
-                self.items[i].sell_in = self.items[i].sell_in - 1;
+                self.items[i].pass_a_day();
                 if self.items[i].sell_in < 0 {
                     if self.items[i].quality > 0 {
                         self.items[i].quality -= 1;
