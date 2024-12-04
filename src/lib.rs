@@ -36,6 +36,7 @@ impl GildedRose {
                 if self.items[i].quality < 50 {
                     self.items[i].quality = self.items[i].quality + 1;
                 }
+                self.items[i].sell_in = self.items[i].sell_in - 1;
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
                 if self.items[i].quality < 50 {
                     self.items[i].quality = self.items[i].quality + 1;
@@ -52,17 +53,13 @@ impl GildedRose {
                         }
                     }
                 }
+                self.items[i].sell_in = self.items[i].sell_in - 1;
             } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
                 // nothing
             } else {
                 if self.items[i].quality > 0 {
                     self.items[i].quality = self.items[i].quality - 1;
                 }
-            }
-
-            if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                // nothing
-            } else {
                 self.items[i].sell_in = self.items[i].sell_in - 1;
             }
 
