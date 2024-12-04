@@ -47,8 +47,7 @@ impl Item {
             }
         } else if self.name == "Backstage passes to a TAFKAL80ETC concert" {
             if self.expired() {
-                let q = self.quality;
-                self.update_quality_by(-q);
+                self.update_quality_by(-self.quality);
             } else {
                 if self.sell_in < 5 {
                     self.update_quality_by(3);
