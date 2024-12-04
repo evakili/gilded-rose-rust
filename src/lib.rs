@@ -55,36 +55,38 @@ impl GildedRose {
             if self.items[i].name == "Aged Brie" {
                 self.items[i].pass_a_day();
 
-                self.items[i].update_quality_by_one();
-
                 if self.items[i].expired() {
-                    self.items[i].update_quality_by_one();
-                }
-            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                self.items[i].pass_a_day();
-
-                if self.items[i].sell_in < 5 {
-                    self.items[i].update_quality_by_one();
-                    self.items[i].update_quality_by_one();
-                    self.items[i].update_quality_by_one();
-                } else if self.items[i].sell_in < 10 {
                     self.items[i].update_quality_by_one();
                     self.items[i].update_quality_by_one();
                 } else {
                     self.items[i].update_quality_by_one();
                 }
+            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
+                self.items[i].pass_a_day();
 
                 if self.items[i].expired() {
                     self.items[i].quality -= self.items[i].quality;
+                } else {
+                    if self.items[i].sell_in < 5 {
+                        self.items[i].update_quality_by_one();
+                        self.items[i].update_quality_by_one();
+                        self.items[i].update_quality_by_one();
+                    } else if self.items[i].sell_in < 10 {
+                        self.items[i].update_quality_by_one();
+                        self.items[i].update_quality_by_one();
+                    } else {
+                        self.items[i].update_quality_by_one();
+                    }
                 }
             } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
                 // nothing
             } else {
                 self.items[i].pass_a_day();
 
-                self.items[i].degrade_quality_by_one();
-                
                 if self.items[i].expired() {
+                    self.items[i].degrade_quality_by_one();
+                    self.items[i].degrade_quality_by_one();
+                } else {
                     self.items[i].degrade_quality_by_one();
                 }
             }
