@@ -45,12 +45,10 @@ impl Item {
             self.update_quality_by(if self.expired() {
                 -self.quality
             } else {
-                if self.sell_in < 5 {
-                    3
-                } else if self.sell_in < 10 {
-                    2
-                } else {
-                    1
+                match self.sell_in {
+                    ..=4 => 3,
+                    ..=9 => 2,
+                    _ => 1,
                 }
             });
         } else {
