@@ -13,6 +13,12 @@ impl Item {
             quality,
         }
     }
+
+    pub fn update_quality_by_one(&mut self) {
+        if self.quality < 50 {
+            self.quality += 1;
+        }
+    }
 }
 
 impl Display for Item {
@@ -33,28 +39,18 @@ impl GildedRose {
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
             if self.items[i].name == "Aged Brie" {
-                if self.items[i].quality < 50 {
-                    self.items[i].quality += 1;
-                }
+                self.items[i].update_quality_by_one();
                 self.items[i].sell_in = self.items[i].sell_in - 1;
                 if self.items[i].sell_in < 0 {
-                    if self.items[i].quality < 50 {
-                        self.items[i].quality += 1;
-                    }
+                    self.items[i].update_quality_by_one();
                 }
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                if self.items[i].quality < 50 {
-                    self.items[i].quality += 1;
-                }
+                self.items[i].update_quality_by_one();
                 if self.items[i].sell_in < 11 {
-                    if self.items[i].quality < 50 {
-                        self.items[i].quality += 1;
-                    }
+                    self.items[i].update_quality_by_one();
                 }
                 if self.items[i].sell_in < 6 {
-                    if self.items[i].quality < 50 {
-                        self.items[i].quality += 1;
-                    }
+                    self.items[i].update_quality_by_one();
                 }
 
                 self.items[i].sell_in = self.items[i].sell_in - 1;
