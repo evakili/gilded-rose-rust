@@ -53,10 +53,10 @@ impl GildedRose {
                     }
                 }
             } else {
-                if self.items[i].quality > 0 {
-                    if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                        // nothing
-                    } else {
+                if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
+                    // nothing
+                } else {
+                    if self.items[i].quality > 0 {
                         self.items[i].quality = self.items[i].quality - 1;
                     }
                 }
@@ -79,11 +79,11 @@ impl GildedRose {
                     self.items[i].quality = self.items[i].quality - self.items[i].quality;
                 }
             } else {
-                if self.items[i].sell_in < 0 {
-                    if self.items[i].quality > 0 {
-                        if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                            //nothing
-                        } else {
+                if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
+                    //nothing
+                } else {
+                    if self.items[i].sell_in < 0 {
+                        if self.items[i].quality > 0 {
                             self.items[i].quality = self.items[i].quality - 1;
                         }
                     }
