@@ -51,6 +51,10 @@ impl GildedRose {
 
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
+            if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
+                continue;
+            }
+
             if self.items[i].name == "Aged Brie" {
                 self.items[i].pass_a_day();
 
@@ -74,8 +78,6 @@ impl GildedRose {
                         self.items[i].update_quality_by(1);
                     }
                 }
-            } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                // nothing
             } else {
                 self.items[i].pass_a_day();
 
