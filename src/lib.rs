@@ -23,6 +23,10 @@ impl Item {
     pub fn pass_a_day(&mut self) {
         self.sell_in -= 1;
     }
+
+    pub fn expired(&self) -> bool {
+        return self.sell_in < 0;
+    }
 }
 
 impl Display for Item {
@@ -45,7 +49,7 @@ impl GildedRose {
             if self.items[i].name == "Aged Brie" {
                 self.items[i].update_quality_by_one();
                 self.items[i].pass_a_day();
-                if self.items[i].sell_in < 0 {
+                if self.items[i].expired() {
                     self.items[i].update_quality_by_one();
                 }
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
@@ -58,7 +62,7 @@ impl GildedRose {
                 }
 
                 self.items[i].pass_a_day();
-                if self.items[i].sell_in < 0 {
+                if self.items[i].expired() {
                     self.items[i].quality -= self.items[i].quality;
                 }
             } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
@@ -68,7 +72,7 @@ impl GildedRose {
                     self.items[i].quality -= 1;
                 }
                 self.items[i].pass_a_day();
-                if self.items[i].sell_in < 0 {
+                if self.items[i].expired() {
                     if self.items[i].quality > 0 {
                         self.items[i].quality -= 1;
                     }
