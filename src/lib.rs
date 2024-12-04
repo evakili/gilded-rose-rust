@@ -31,6 +31,41 @@ impl Item {
     pub fn expired(&self) -> bool {
         return self.sell_in < 0;
     }
+
+    pub fn update(&mut self) {
+        if self.name == "Sulfuras, Hand of Ragnaros" {
+            return;
+        }
+
+        self.pass_a_day();
+
+        if self.name == "Aged Brie" {
+            if self.expired() {
+                self.update_quality_by(2);
+            } else {
+                self.update_quality_by(1);
+            }
+        } else if self.name == "Backstage passes to a TAFKAL80ETC concert" {
+            if self.expired() {
+                let q = self.quality;
+                self.update_quality_by(-q);
+            } else {
+                if self.sell_in < 5 {
+                    self.update_quality_by(3);
+                } else if self.sell_in < 10 {
+                    self.update_quality_by(2);
+                } else {
+                    self.update_quality_by(1);
+                }
+            }
+        } else {
+            if self.expired() {
+                self.update_quality_by(-2);
+            } else {
+                self.update_quality_by(-1);
+            }
+        }
+    }
 }
 
 impl Display for Item {
@@ -50,38 +85,7 @@ impl GildedRose {
 
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
-            if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
-                continue;
-            }
-
-            self.items[i].pass_a_day();
-
-            if self.items[i].name == "Aged Brie" {
-                if self.items[i].expired() {
-                    self.items[i].update_quality_by(2);
-                } else {
-                    self.items[i].update_quality_by(1);
-                }
-            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                if self.items[i].expired() {
-                    let q = self.items[i].quality;
-                    self.items[i].update_quality_by(-q);
-                } else {
-                    if self.items[i].sell_in < 5 {
-                        self.items[i].update_quality_by(3);
-                    } else if self.items[i].sell_in < 10 {
-                        self.items[i].update_quality_by(2);
-                    } else {
-                        self.items[i].update_quality_by(1);
-                    }
-                }
-            } else {
-                if self.items[i].expired() {
-                    self.items[i].update_quality_by(-2);
-                } else {
-                    self.items[i].update_quality_by(-1);
-                }
-            }
+            self.items[i].update();
         }
     }
 }
