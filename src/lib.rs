@@ -20,6 +20,12 @@ impl Item {
         }
     }
 
+    pub fn degrade_quality_by_one(&mut self) {
+        if self.quality > 0 {
+            self.quality -= 1;
+        }
+    }
+
     pub fn pass_a_day(&mut self) {
         self.sell_in -= 1;
     }
@@ -76,14 +82,10 @@ impl GildedRose {
             } else {
                 self.items[i].pass_a_day();
 
-                if self.items[i].quality > 0 {
-                    self.items[i].quality -= 1;
-                }
+                self.items[i].degrade_quality_by_one();
                 
                 if self.items[i].expired() {
-                    if self.items[i].quality > 0 {
-                        self.items[i].quality -= 1;
-                    }
+                    self.items[i].degrade_quality_by_one();
                 }
             }
         }
