@@ -47,34 +47,39 @@ impl GildedRose {
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
             if self.items[i].name == "Aged Brie" {
-                self.items[i].update_quality_by_one();
                 self.items[i].pass_a_day();
+
+                self.items[i].update_quality_by_one();
+
                 if self.items[i].expired() {
                     self.items[i].update_quality_by_one();
                 }
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                if self.items[i].sell_in < 6 {
+                self.items[i].pass_a_day();
+
+                if self.items[i].sell_in < 5 {
                     self.items[i].update_quality_by_one();
                     self.items[i].update_quality_by_one();
                     self.items[i].update_quality_by_one();
-                } else if self.items[i].sell_in < 11 {
+                } else if self.items[i].sell_in < 10 {
                     self.items[i].update_quality_by_one();
                     self.items[i].update_quality_by_one();
                 } else {
                     self.items[i].update_quality_by_one();
                 }
 
-                self.items[i].pass_a_day();
                 if self.items[i].expired() {
                     self.items[i].quality -= self.items[i].quality;
                 }
             } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
                 // nothing
             } else {
+                self.items[i].pass_a_day();
+
                 if self.items[i].quality > 0 {
                     self.items[i].quality -= 1;
                 }
-                self.items[i].pass_a_day();
+                
                 if self.items[i].expired() {
                     if self.items[i].quality > 0 {
                         self.items[i].quality -= 1;
