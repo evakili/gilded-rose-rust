@@ -22,9 +22,11 @@ impl Item {
         }
     }
 
-    pub fn degrade_quality_by_one(&mut self) {
-        if self.quality > 0 {
-            self.quality -= 1;
+    pub fn degrade_quality_by(&mut self, n: i32) {
+        if self.quality - n > 0 {
+            self.quality -= n;
+        } else {
+            self.quality = 0;
         }
     }
 
@@ -66,7 +68,8 @@ impl GildedRose {
                 self.items[i].pass_a_day();
 
                 if self.items[i].expired() {
-                    self.items[i].quality -= self.items[i].quality;
+                    let q = self.items[i].quality;
+                    self.items[i].degrade_quality_by(q);
                 } else {
                     if self.items[i].sell_in < 5 {
                         self.items[i].update_quality_by(3);
@@ -82,10 +85,9 @@ impl GildedRose {
                 self.items[i].pass_a_day();
 
                 if self.items[i].expired() {
-                    self.items[i].degrade_quality_by_one();
-                    self.items[i].degrade_quality_by_one();
+                    self.items[i].degrade_quality_by(2);
                 } else {
-                    self.items[i].degrade_quality_by_one();
+                    self.items[i].degrade_quality_by(1);
                 }
             }
         }
