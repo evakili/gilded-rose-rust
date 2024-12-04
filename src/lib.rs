@@ -17,8 +17,7 @@ impl Item {
     pub fn update_quality_by(&mut self, n: i32) {
         if self.quality + n < 0 {
             self.quality = 0;
-        }
-        else if self.quality + n < 50 {
+        } else if self.quality + n < 50 {
             self.quality += n;
         } else {
             self.quality = 50;
@@ -55,17 +54,15 @@ impl GildedRose {
                 continue;
             }
 
-            if self.items[i].name == "Aged Brie" {
-                self.items[i].pass_a_day();
+            self.items[i].pass_a_day();
 
+            if self.items[i].name == "Aged Brie" {
                 if self.items[i].expired() {
                     self.items[i].update_quality_by(2);
                 } else {
                     self.items[i].update_quality_by(1);
                 }
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                self.items[i].pass_a_day();
-
                 if self.items[i].expired() {
                     let q = self.items[i].quality;
                     self.items[i].update_quality_by(-q);
@@ -79,8 +76,6 @@ impl GildedRose {
                     }
                 }
             } else {
-                self.items[i].pass_a_day();
-
                 if self.items[i].expired() {
                     self.items[i].update_quality_by(-2);
                 } else {
