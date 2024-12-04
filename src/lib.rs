@@ -38,11 +38,15 @@ impl Item {
         }
 
         self.pass_a_day();
-
-        if self.name == "Aged Brie" {
-            self.update_quality_by(if self.expired() { 2 } else { 1 });
+        
+        self.update_quality_by(if self.name == "Aged Brie" {
+            if self.expired() {
+                2
+            } else {
+                1
+            }
         } else if self.name == "Backstage passes to a TAFKAL80ETC concert" {
-            self.update_quality_by(if self.expired() {
+            if self.expired() {
                 -self.quality
             } else {
                 match self.sell_in {
@@ -50,10 +54,14 @@ impl Item {
                     ..=9 => 2,
                     _ => 1,
                 }
-            });
+            }
         } else {
-            self.update_quality_by(if self.expired() { -2 } else { -1 });
-        }
+            if self.expired() {
+                -2
+            } else {
+                -1
+            }
+        });
     }
 }
 
