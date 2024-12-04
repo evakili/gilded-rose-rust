@@ -32,42 +32,23 @@ impl GildedRose {
 
     pub fn update_quality(&mut self) {
         for i in 0..self.items.len() {
-            if self.items[i].name == "Aged Brie"
-            {
+            if self.items[i].name == "Aged Brie" {
                 if self.items[i].quality < 50 {
                     self.items[i].quality = self.items[i].quality + 1;
-    
-                    if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                        if self.items[i].sell_in < 11 {
-                            if self.items[i].quality < 50 {
-                                self.items[i].quality = self.items[i].quality + 1;
-                            }
-                        }
-    
-                        if self.items[i].sell_in < 6 {
-                            if self.items[i].quality < 50 {
-                                self.items[i].quality = self.items[i].quality + 1;
-                            }
+                }
+            } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
+                if self.items[i].quality < 50 {
+                    self.items[i].quality = self.items[i].quality + 1;
+
+                    if self.items[i].sell_in < 11 {
+                        if self.items[i].quality < 50 {
+                            self.items[i].quality = self.items[i].quality + 1;
                         }
                     }
-                }
-            }
-            else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert"
-            {
-                if self.items[i].quality < 50 {
-                    self.items[i].quality = self.items[i].quality + 1;
 
-                    if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                        if self.items[i].sell_in < 11 {
-                            if self.items[i].quality < 50 {
-                                self.items[i].quality = self.items[i].quality + 1;
-                            }
-                        }
-
-                        if self.items[i].sell_in < 6 {
-                            if self.items[i].quality < 50 {
-                                self.items[i].quality = self.items[i].quality + 1;
-                            }
+                    if self.items[i].sell_in < 6 {
+                        if self.items[i].quality < 50 {
+                            self.items[i].quality = self.items[i].quality + 1;
                         }
                     }
                 }
