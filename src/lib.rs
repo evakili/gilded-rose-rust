@@ -15,18 +15,13 @@ impl Item {
     }
 
     pub fn update_quality_by(&mut self, n: i32) {
-        if self.quality + n < 50 {
+        if self.quality + n < 0 {
+            self.quality = 0;
+        }
+        else if self.quality + n < 50 {
             self.quality += n;
         } else {
             self.quality = 50;
-        }
-    }
-
-    pub fn degrade_quality_by(&mut self, n: i32) {
-        if self.quality - n > 0 {
-            self.quality -= n;
-        } else {
-            self.quality = 0;
         }
     }
 
@@ -69,7 +64,7 @@ impl GildedRose {
 
                 if self.items[i].expired() {
                     let q = self.items[i].quality;
-                    self.items[i].degrade_quality_by(q);
+                    self.items[i].update_quality_by(-q);
                 } else {
                     if self.items[i].sell_in < 5 {
                         self.items[i].update_quality_by(3);
@@ -85,9 +80,9 @@ impl GildedRose {
                 self.items[i].pass_a_day();
 
                 if self.items[i].expired() {
-                    self.items[i].degrade_quality_by(2);
+                    self.items[i].update_quality_by(-2);
                 } else {
-                    self.items[i].degrade_quality_by(1);
+                    self.items[i].update_quality_by(-1);
                 }
             }
         }
