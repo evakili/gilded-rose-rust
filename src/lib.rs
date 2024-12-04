@@ -84,8 +84,8 @@ impl GildedRose {
     }
 
     pub fn update_quality(&mut self) {
-        for i in 0..self.items.len() {
-            self.items[i].update();
+        for item in &mut self.items {
+            item.update();
         }
     }
 }
