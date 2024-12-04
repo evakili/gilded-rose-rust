@@ -40,29 +40,21 @@ impl Item {
         self.pass_a_day();
 
         if self.name == "Aged Brie" {
-            if self.expired() {
-                self.update_quality_by(2);
-            } else {
-                self.update_quality_by(1);
-            }
+            self.update_quality_by(if self.expired() { 2 } else { 1 });
         } else if self.name == "Backstage passes to a TAFKAL80ETC concert" {
-            if self.expired() {
-                self.update_quality_by(-self.quality);
+            self.update_quality_by(if self.expired() {
+                -self.quality
             } else {
                 if self.sell_in < 5 {
-                    self.update_quality_by(3);
+                    3
                 } else if self.sell_in < 10 {
-                    self.update_quality_by(2);
+                    2
                 } else {
-                    self.update_quality_by(1);
+                    1
                 }
-            }
+            });
         } else {
-            if self.expired() {
-                self.update_quality_by(-2);
-            } else {
-                self.update_quality_by(-1);
-            }
+            self.update_quality_by(if self.expired() { -2 } else { -1 });
         }
     }
 }
