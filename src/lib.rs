@@ -53,11 +53,14 @@ impl GildedRose {
                     self.items[i].update_quality_by_one();
                 }
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-                self.items[i].update_quality_by_one();
-                if self.items[i].sell_in < 11 {
-                    self.items[i].update_quality_by_one();
-                }
                 if self.items[i].sell_in < 6 {
+                    self.items[i].update_quality_by_one();
+                    self.items[i].update_quality_by_one();
+                    self.items[i].update_quality_by_one();
+                } else if self.items[i].sell_in < 11 {
+                    self.items[i].update_quality_by_one();
+                    self.items[i].update_quality_by_one();
+                } else {
                     self.items[i].update_quality_by_one();
                 }
 
