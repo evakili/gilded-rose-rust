@@ -14,9 +14,11 @@ impl Item {
         }
     }
 
-    pub fn update_quality_by_one(&mut self) {
-        if self.quality < 50 {
-            self.quality += 1;
+    pub fn update_quality_by(&mut self, n: i32) {
+        if self.quality + n < 50 {
+            self.quality += n;
+        } else {
+            self.quality = 50;
         }
     }
 
@@ -56,10 +58,9 @@ impl GildedRose {
                 self.items[i].pass_a_day();
 
                 if self.items[i].expired() {
-                    self.items[i].update_quality_by_one();
-                    self.items[i].update_quality_by_one();
+                    self.items[i].update_quality_by(2);
                 } else {
-                    self.items[i].update_quality_by_one();
+                    self.items[i].update_quality_by(1);
                 }
             } else if self.items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
                 self.items[i].pass_a_day();
@@ -68,14 +69,11 @@ impl GildedRose {
                     self.items[i].quality -= self.items[i].quality;
                 } else {
                     if self.items[i].sell_in < 5 {
-                        self.items[i].update_quality_by_one();
-                        self.items[i].update_quality_by_one();
-                        self.items[i].update_quality_by_one();
+                        self.items[i].update_quality_by(3);
                     } else if self.items[i].sell_in < 10 {
-                        self.items[i].update_quality_by_one();
-                        self.items[i].update_quality_by_one();
+                        self.items[i].update_quality_by(2);
                     } else {
-                        self.items[i].update_quality_by_one();
+                        self.items[i].update_quality_by(1);
                     }
                 }
             } else if self.items[i].name == "Sulfuras, Hand of Ragnaros" {
