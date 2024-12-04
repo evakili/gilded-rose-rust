@@ -54,6 +54,13 @@ impl Item {
                     }
                 }
             }
+            "Conjured Mana Cake" => {
+                if self.expired() {
+                    -4
+                } else {
+                    -2
+                }
+            }
             _ => {
                 if self.expired() {
                     -2
